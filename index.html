@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Profile & Loss Calculator </title>
+</head>
+
+<body>
+    <div class="nav">
+    <h1>Stock Profile & Loss Calculator </h1>
+    
+    <main>
+        <label class="input-label" for="initial-price">
+            Intial Price
+            <input class="input" type="text" id="initial-price" placeholder="Enter Initial Price Here" /></label>
+        <label class="input-label" for="stocks-quantity">
+            Quantity of Stocks
+            <input class="input" type="text" id="stocks-quantity" placeholder="Enter the Number of Stocks bought" />
+        </label>
+        <label class="input-label" for="current-price">Current Price
+            <input class="input" type="text" id="current-price"
+                placeholder="Enter the Current Price of the stocks" /></label>
+
+        <button id="submit-btn" class="btn">Tell Me!!</button>
+
+        <div id="output" class="output"></div>
+    </main>
+    <footer>
+        <a href="https://github.com/">
+        <img class="sub-img"src="github.png">
+        <a href="https://twitter.com/home">
+        <img class="nav-img" src="twit.png">
+    </footer>
+    
+
+
+
+
+    <script>
+        var initialPrice = document.querySelector("#initial-price");
+        var stocksQuantity = document.querySelector("#stocks-quantity");
+        var currentPrice = document.querySelector("#current-price");
+        var submitBtn = document.querySelector("#submit-btn");
+        var outputBox = document.querySelector("#output");
+
+
+        submitBtn.addEventListener("click", submitHandler);
+
+        function submitHandler() {
+            var ip = Number(initialPrice.value);
+            var qty = Number(stocksQuantity.value);
+            var curr = Number(currentPrice.value);
+
+            calculateProfitAndLoss(ip, qty, curr);
+        }
+
+
+        function calculateProfitAndLoss(initial, quantity, current) {
+            if (initial > current) {
+                var loss = (initial - current) * quantity;
+                var lossPercentage = (loss / initial) * 100;
+
+                showOutput(
+                    `Hey, the loss is ${loss} and the percent is ${lossPercentage}%`
+                );
+            } else if (current > initial) {
+                var profit = (current - initial) * quantity;
+                var profitPercentage = (profit / initial) * 100;
+
+                showOutput(
+                    `Hey, the profit is ${profit} and the percent is ${profitPercentage}%`
+                );
+            } else {
+                showOutput(`No pain no gain and no gain no pain`);
+            }
+        }
+
+        function showOutput(message) {
+            outputBox.innerHTML = message;
+        }
+
+
+
+
+    </script> 
+    
+
+</body>
+
+</html>
